@@ -24,7 +24,7 @@
     background-color: rgb(168, 110, 110); /* Choose a chat bubble color */
     border-radius: 5px;
     border: 1px solid #ccc;
-    word-wrap: break-word;
+    /* word-wrap: break-word; */
   }
 
   .message-text {
@@ -39,7 +39,7 @@
 
   .received {
     background-color: #4f5d75;
-    align-self: flex-start;
+    /* align-self: flex-start; */
   }
 
   .message-form {
@@ -86,7 +86,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
-    max-height: 60%; /* Adjust as needed */
+    max-height: calc(100% - 80px); /* Adjust as needed */
     overflow-y: auto;
   }
 </style>
@@ -107,9 +107,9 @@
       TextTalker
     </div>
     {% if user.is_authenticated %}
-    <div class="card-header" style="background-color: #2d3142">
-      <b>Welcome, {{user.username}}</b>
-      <a style="color: yellow" href="logout">Logout</a>
+    <div class="card-header" style="background-color: #ef8354">
+      <b>Welcome, {{user.username}} </b>
+      <a style="color: yellow; float: right" href="logout">Logout</a>
     </div>
     {% else %}
     <div class="card-header" style="background-color: #2d3142">
@@ -119,16 +119,17 @@
     {% endif %}
     <div class="card-body messages-box">
       <ul class="list-unstyled messages-list">
-        <!-- <li class="message received">
+        <li class="message received">
           <div class="message-text">
             <div class="message-sender">
               <b>AI Chatbot</b>
             </div>
             <div class="message-content">
-              Hi {{user.username}}, I am your AI Chatbot, you can ask me anything.
+              Hi {{user.username}}, I am your AI Chatbot, you can ask me
+              anything.
             </div>
           </div>
-        </li> -->
+        </li>
 
         {% for chat in chats %} {% if chat.user == request.user %}
 
