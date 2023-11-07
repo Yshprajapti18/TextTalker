@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.contrib import auth
 
 # Create your views here.
 
@@ -26,3 +27,12 @@ def chatbot(request):
         
         return  JsonResponse({'message' : message , 'response' : str(response)})
     return render(request,'chatbot.html')
+
+def login(request):
+    return render(request,'login.html')
+
+def register(request):
+    return render(request,'register.html')
+
+def logout(request):
+    auth.logout(request)
