@@ -1,6 +1,6 @@
 # TextTalker: AI Chatbot with Django Backend
 
-TextTalker is an AI-powered chatbot built with Django that offers seamless communication between users and the AI model. The chatbot integrates with the HugChat API for enhanced chat functionality and includes user authentication and chat storage features.
+TextTalker is an AI-powered chatbot built with Django that offers seamless communication between users and the AI model. The chatbot integrates with the HuggingChat API for enhanced chat functionality and includes user authentication and chat storage features.
 
 ![Screenshot 2023-11-11 012634](https://github.com/Yshprajapti18/Django-Chatbot/assets/128960060/be160180-3241-4ca6-91c9-24961e3575d6)
 
@@ -11,7 +11,7 @@ TextTalker is an AI-powered chatbot built with Django that offers seamless commu
 
 - **Chat Storage**: Store and retrieve chat history for users.
 
-- **HugChat API Integration**: Seamlessly integrate with the HugChat API for AI chatbot capabilities.
+- **HuggingChat API Integration**: Seamlessly integrate with the HugChat API for AI chatbot capabilities.
 
 - **Interactive UI**: Enhance the user experience with a responsive and interactive user interface powered by JavaScript.
 
@@ -23,7 +23,7 @@ These instructions will help you get your project up and running on your local m
 
 - Python 3.x
 - Django
-- HugChat API Key (get it [here](https://hugchatapi.example.com))
+- HugggingChat account (get it [here](https://huggingface.co/chat/))
 
 ### Installation
 
@@ -47,7 +47,7 @@ These instructions will help you get your project up and running on your local m
   ```
 4.Configure API keys:
 
-  Obtain your HugChat account and password and add it to your Django settings or make a .env file with 'EMAIL' and 'PASSWORD'.
+  Obtain your HuggingChat account and password and add it to your Django settings or make a .env file with 'EMAIL' and 'PASSWORD'.
 
 6.Start the development server:
 
