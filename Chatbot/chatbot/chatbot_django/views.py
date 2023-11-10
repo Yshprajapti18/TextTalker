@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your views here.
 
@@ -15,7 +16,13 @@ from django.shortcuts import redirect
    
 
 def chatbot(request):
-    sign = Login('jicsocialmedia1234@gmail.com', 'QezS8>=^rfR~,"3')
+    credentials ={
+        'EMAIL' : settings.EMAIL,
+        'PASSWORD' : settings.PASSWORD
+    }
+    email = credentials['EMAIL']
+    password = credentials['PASSWORD']
+    sign = Login(email, password)
     cookies = sign.login()
 
     cookie_path_dir = "./cookies_snapshot"
