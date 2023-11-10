@@ -26,10 +26,10 @@ These instructions will help you get your project up and running on your local m
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/texttalker.git
-   cd texttalker
-   ```
+  ```bash
+  git clone https://github.com/your-username/texttalker.git
+  cd texttalker
+  ```
 2.Create a virtual environment and install dependencies:
 
   ```bash
@@ -44,9 +44,9 @@ These instructions will help you get your project up and running on your local m
   ```
 4.Configure API keys:
 
-  Obtain your HugChat API key and add it to your Django settings.
+  Obtain your HugChat account and password and add it to your Django settings or make a .env file with 'EMAIL' and 'PASSWORD'.
 
-5.Start the development server:
+6.Start the development server:
 
   ```bash
   python manage.py runserver
