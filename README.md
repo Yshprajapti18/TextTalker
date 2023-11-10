@@ -2,6 +2,9 @@
 
 TextTalker is an AI-powered chatbot built with Django that offers seamless communication between users and the AI model. The chatbot integrates with the HugChat API for enhanced chat functionality and includes user authentication and chat storage features.
 
+![Screenshot 2023-11-11 012634](https://github.com/Yshprajapti18/Django-Chatbot/assets/128960060/be160180-3241-4ca6-91c9-24961e3575d6)
+
+
 ## Features
 
 - **User Authentication**: Secure user registration and login system to manage user access.
