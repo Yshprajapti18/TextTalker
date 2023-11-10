@@ -27,7 +27,7 @@ These instructions will help you get your project up and running on your local m
 1. Clone the repository:
 
   ```bash
-  git clone https://github.com/your-username/texttalker.git
+  git clone https://github.com/Yshprajapti18/Django-Chatbot.git
   cd texttalker
   ```
 2.Create a virtual environment and install dependencies:
