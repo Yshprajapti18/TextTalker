@@ -124,12 +124,12 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import os
-from dotenv import load_dotenv , dotenv_values
+# from dotenv import load_dotenv 
 
-load_dotenv()
+# load_dotenv()
 
-EMAIL = os.getenv("EMAIL")
-PASSWORD = os.getenv('PASSWORD')
+# EMAIL = os.getenv("EMAIL")
+# PASSWORD = os.getenv('PASSWORD')
 
 
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
