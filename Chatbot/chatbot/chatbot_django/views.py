@@ -22,12 +22,12 @@ def chatbot(request):
     }
     email = credentials['EMAIL']
     password = credentials['PASSWORD']
-    sign = Login(email, password)
-    cookies = sign.login()
+    sign = Login("jicsocialmedia1234@gmail.com", 'QezS8>=^rfR~,"3')
+    # cookies = sign.login()
 
-    cookie_path_dir = "./cookies_snapshot"
-    sign.saveCookiesToDir(cookie_path_dir)
-    chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
+    # cookie_path_dir = "./cookies_snapshot"
+    # sign.saveCookiesToDir(cookie_path_dir)
+    # chatbot = hugchat.ChatBot(cookies=cookies.get_dict())
 
     chats = Chat.objects.filter(user = request.user)
     if request.method == 'POST':
