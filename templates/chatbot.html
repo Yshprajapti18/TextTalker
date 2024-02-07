@@ -1,0 +1,235 @@
+{% extends 'base.html' %} {% block styles %}
+<style>
+  body,
+  :root {
+    --primary-color: #00ff77; /* Update the color value to your desired primary color */
+  }
+
+  html {
+    height: 100%;
+  }
+
+  .messages-box {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .messages-list {
+    padding-left: 0;
+  }
+
+  .message {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: rgb(168, 110, 110); /* Choose a chat bubble color */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    /* word-wrap: break-word; */
+  }
+
+  .message-text {
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .sent {
+    background-color: #bfc0c0;
+    align-self: flex-end;
+  }
+
+  .received {
+    background-color: #4f5d75;
+    /* align-self: flex-start; */
+  }
+
+  .message-form {
+    position: fixed;
+    bottom: 0;
+    left: 25%; /* Adjust as needed to center horizontally */
+    width: 50%;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .message-input {
+    width: 100%;
+    display: flex;
+    /* padding: 8px; */
+    border: burlywood;
+    border-radius: 5px;
+    outline: burlywood;
+    border-width: 5px;
+  }
+
+  .btn-send {
+    display: block;
+    /* margin-top: 10px; */
+    background-color: #ef8354; /* Adjust to your preferred button color */
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .chat-container {
+    position: fixed;
+    display: flex;
+    height: 100%;
+    bottom: 80px; /* Adjust to leave space for the message input */
+    left: 25%;
+    width: 50%;
+    background-color: #f5f5f5; /* Choose an appropriate background color */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    max-height: calc(100% - 80px); /* Adjust as needed */
+    overflow-y: auto;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="chat-container">
+  <div class="card flex-grow-1">
+    <div
+      class="card-header"
+      style="
+        background-color: #2d3142;
+        color: white;
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-size: 36px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        color: #ef8354;
+      "
+    >
+      TextTalker
+    </div>
+    {% if user.is_authenticated %}
+    <div class="card-header" style="background-color: #ef8354">
+      <b>Welcome, {{user.username}} </b>
+      <a style="color: yellow; float: right" href="logout">Logout</a>
+    </div>
+    {% else %}
+    <div class="card-header" style="background-color: #2d3142">
+      <a style="color: #4f5d75" href="login">Login</a>
+      <a style="color: #4f5d75" href="register">Register</a>
+    </div>
+    {% endif %}
+    <div class="card-body messages-box">
+      <ul class="list-unstyled messages-list">
+        <li class="message received">
+          <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content">
+              Hi {{user.username}}, I am your AI Chatbot, you can ask me
+              anything.
+            </div>
+          </div>
+        </li>
+
+        {% for chat in chats %} {% if chat.user == request.user %}
+
+        <li class="message sent">
+          <div class="message-text">
+            <div class="message-sender">
+              <b>You</b>
+            </div>
+            <div class="message-content">{{chat.message}}</div>
+          </div>
+        </li>
+
+        <li class="message received">
+          <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content">{{chat.response}}</div>
+          </div>
+        </li>
+
+        {% endif %} {% endfor %}
+      </ul>
+    </div>
+    <br /><br />
+    <br /><br />
+    <br /><br />
+  </div>
+  <form class="message-form">
+    {%csrf_token%}
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control message-input"
+        placeholder="Type your message..."
+      />
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary btn-send">Send</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  const messagesList = document.querySelector(".messages-list");
+  const messageForm = document.querySelector(".message-form");
+  const messageInput = document.querySelector(".message-input");
+
+  messageForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const message = messageInput.value.trim();
+    if (message.length === 0) {
+      return;
+    }
+
+    const messageItem = document.createElement("li"); //creates a list element with class message and sent
+    messageItem.classList.add("message", "sent"); //and appends it to messageItem
+    messageItem.innerHTML = `
+        <div class="message-text">
+            <div class="message-sender">
+                <b>You</b>
+            </div>
+            <div class="message-content">
+                ${message}
+            </div>
+        </div>`;
+    messagesList.appendChild(messageItem);
+
+    messageInput.value = "";
+
+    fetch("", {
+      //fetch is js funtion use to send info to api or backend
+      method: "POST", //method used here is post
+      headers: { "Content-Type": "application/x-www-form-urlencoded" }, //this is the content type for form
+      body: new URLSearchParams({
+        csrfmiddlewaretoken: document.querySelector(
+          //crsf token included above is used here to prevent attack(django requirement)
+          "[name=csrfmiddlewaretoken]"
+        ).value,
+        message: message,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const response = data.response;
+        const messageItem = document.createElement("li");
+        messageItem.classList.add("message", "received");
+        messageItem.innerHTML = `
+        <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content">
+                ${response}
+            </div>
+        </div>
+          `;
+        messagesList.appendChild(messageItem);
+      });
+  });
+</script>
+{% endblock %}
